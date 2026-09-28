@@ -24,8 +24,8 @@ const DEFAULT_SETTINGS: Settings = {
   autoPlay: true,
   autoListen: true,
   lang: 'cs',
-  sessionLength: 10,
-  perNoteSeconds: 10,
+  sessionLength: 20,
+  perNoteSeconds: 20,
 };
 
 function initialSettings(): Settings {
