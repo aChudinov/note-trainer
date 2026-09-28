@@ -270,7 +270,7 @@ export function Game({
       {showTimer && (
         <div className={`${g.timer} ${danger ? g.timerDanger : ''}`}>
           <span className={g.timerBar}>
-            <span ref={barRef} className={g.timerFill} style={{ width: '100%' }} />
+            <span ref={barRef} className={g.timerFill} />
           </span>
           <span className={g.timerNum}>{secLeft}s</span>
         </div>
