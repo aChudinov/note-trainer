@@ -1,0 +1,120 @@
+.tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.tile {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 16px 18px;
+}
+.tile .v {
+  font-size: 32px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.tile .k {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.tile.accent .v {
+  color: var(--accent);
+}
+.tile.gold .v {
+  color: var(--gold);
+}
+
+.section {
+  margin-top: 22px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 16px 18px;
+}
+.sectionTitle {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 14px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 0;
+}
+.rowLabel {
+  flex: none;
+  width: 34px;
+  font-weight: 800;
+  font-size: 18px;
+}
+.bar {
+  flex: 1;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+}
+.barFill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+.pct {
+  flex: none;
+  width: 46px;
+  text-align: right;
+  font-weight: 800;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.count {
+  flex: none;
+  width: 62px;
+  text-align: right;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  font-weight: 700;
+  padding: 40px 12px;
+}
+
+.resetBtn {
+  margin-top: 22px;
+  width: 100%;
+  border: none;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 15px;
+  border-radius: 16px;
+  cursor: pointer;
+  background: var(--surface);
+  color: var(--muted);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.1s ease, color 0.15s, background 0.15s;
+}
+.resetBtn:active {
+  transform: scale(0.98);
+}
+.resetBtn.armed {
+  background: var(--bad-soft);
+  color: var(--bad);
+}

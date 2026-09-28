@@ -7,6 +7,7 @@ import {
   type Clef,
   type Letter,
 } from '../music';
+import { useT } from '../i18n';
 import a from './answers.module.css';
 import c from './controls.module.css';
 
@@ -18,6 +19,7 @@ interface WriteModeProps {
 }
 
 export function WriteMode({ midi, clef, answered, onAnswer }: WriteModeProps) {
+  const t = useT();
   const [letter, setLetter] = useState<Letter | null>(null);
   const [oct, setOct] = useState<number | null>(null);
   const octaves = octavesFor(clef);
@@ -86,14 +88,14 @@ export function WriteMode({ midi, clef, answered, onAnswer }: WriteModeProps) {
             setOct(null);
           }}
         >
-          Smazat
+          {t.clear}
         </button>
         <button
           className={`${c.btn} ${c.btnPrimary}`}
           disabled={answered || !ready}
           onClick={check}
         >
-          Zkontrolovat
+          {t.check}
         </button>
       </div>
     </div>

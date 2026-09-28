@@ -34,6 +34,39 @@ export function playNote(midi: number): void {
   }
 }
 
+/** Cheerful "tadaa" fanfare — a rising major arpeggio with a final sparkle chord. */
+export function playSuccess(): void {
+  try {
+    const ac = getCtx();
+    if (ac.state === 'suspended') void ac.resume();
+    const t0 = ac.currentTime;
+
+    const blip = (midi: number, at: number, dur: number, peak: number, type: OscillatorType) => {
+      const o = ac.createOscillator();
+      const g = ac.createGain();
+      o.type = type;
+      o.frequency.value = midiToFreq(midi);
+      g.gain.setValueAtTime(0.0001, at);
+      g.gain.exponentialRampToValueAtTime(peak, at + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+      o.connect(g);
+      g.connect(ac.destination);
+      o.start(at);
+      o.stop(at + dur + 0.05);
+    };
+
+    // rising arpeggio C5 E5 G5 C6
+    const arp = [72, 76, 79, 84];
+    arp.forEach((m, i) => blip(m, t0 + i * 0.085, 0.45, 0.24, 'triangle'));
+
+    // final sparkle chord on top
+    const tc = t0 + arp.length * 0.085;
+    [84, 88, 91].forEach((m) => blip(m, tc, 0.8, 0.16, 'sine'));
+  } catch {
+    /* ignore audio errors */
+  }
+}
+
 /**
  * Autocorrelation pitch detection (McLeod-style prefiltering + parabolic interpolation).
  * Returns frequency in Hz, or -1 when no confident pitch is found.

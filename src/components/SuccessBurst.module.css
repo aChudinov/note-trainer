@@ -1,0 +1,58 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 45;
+}
+
+.emoji {
+  font-size: clamp(90px, 26vw, 160px);
+  line-height: 1;
+  filter: drop-shadow(0 8px 24px rgba(42, 36, 51, 0.25));
+  animation: burst 0.95s cubic-bezier(0.18, 0.8, 0.28, 1) forwards;
+}
+
+.ring {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 7px solid var(--gold);
+  animation: ring 0.95s ease-out forwards;
+}
+.ring2 {
+  border-color: var(--accent);
+  animation-delay: 0.09s;
+}
+
+@keyframes burst {
+  0% {
+    transform: scale(0.2) rotate(-18deg);
+    opacity: 0;
+  }
+  28% {
+    transform: scale(1.22) rotate(9deg);
+    opacity: 1;
+  }
+  62% {
+    transform: scale(0.98) rotate(-2deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.08) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+@keyframes ring {
+  0% {
+    transform: scale(0.3);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}

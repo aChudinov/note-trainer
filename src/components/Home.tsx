@@ -1,6 +1,7 @@
 import type { Dispatch, SetStateAction } from 'react';
 import type { ClefChoice, Mode } from '../music';
 import type { Settings } from '../App';
+import { LANG_NAMES, useT, type Lang } from '../i18n';
 import c from './controls.module.css';
 import s from './Home.module.css';
 
@@ -12,19 +13,10 @@ interface HomeProps {
   isDark: boolean;
   onToggleTheme: () => void;
   onStart: (mode: Mode) => void;
+  onOpenStats: () => void;
 }
 
-const CLEFS: { id: ClefChoice; label: string; ic: string }[] = [
-  { id: 'treble', label: 'Houslový', ic: '𝄞' },
-  { id: 'bass', label: 'Basový', ic: '𝄢' },
-  { id: 'both', label: 'Oba', ic: '🎼' },
-];
-
-const MODES: { id: Mode; icon: string; title: string; desc: string }[] = [
-  { id: 1, icon: '👀', title: 'Poznej notu', desc: 'Vyber správný název ze čtyř možností' },
-  { id: 2, icon: '✏️', title: 'Napiš notu', desc: 'Zadej název a oktávu, třeba G1' },
-  { id: 3, icon: '🎤', title: 'Zahraj notu', desc: 'Zahraj notu na klavír — poslechnu si ji' },
-];
+const LANGS: Lang[] = ['cs', 'ru'];
 
 export function Home({
   clef,
@@ -34,34 +26,45 @@ export function Home({
   isDark,
   onToggleTheme,
   onStart,
+  onOpenStats,
 }: HomeProps) {
+  const t = useT();
+
+  const clefs: { id: ClefChoice; label: string; ic: string }[] = [
+    { id: 'treble', label: t.clefTreble, ic: '𝄞' },
+    { id: 'bass', label: t.clefBass, ic: '𝄢' },
+    { id: 'both', label: t.clefBoth, ic: '🎼' },
+  ];
+
+  const modes: { id: Mode; icon: string; title: string; desc: string }[] = [
+    { id: 1, icon: '👀', title: t.mode1Title, desc: t.mode1Desc },
+    { id: 2, icon: '✏️', title: t.mode2Title, desc: t.mode2Desc },
+    { id: 3, icon: '🎤', title: t.mode3Title, desc: t.mode3Desc },
+  ];
+
   return (
     <div className={c.wrap}>
       <div className={c.topbar}>
         <div className={c.brand}>
           <span className={c.logo}>🎹</span>
-          <h1>Čtu noty</h1>
+          <h1>{t.appTitle}</h1>
         </div>
         <button
           className={c.ghostBtn}
           onClick={onToggleTheme}
-          title="Světlý / tmavý režim"
-          aria-label="Přepnout režim"
+          title={t.toggleTheme}
+          aria-label={t.toggleTheme}
         >
           {isDark ? '☀️' : '🌙'}
         </button>
       </div>
 
-      <p className={s.heroSub}>Procvičuj čtení not na klavír 🎶</p>
+      <p className={s.heroSub}>{t.heroSub}</p>
 
-      <p className={c.sectionLabel}>Klíč</p>
-      <div className={s.seg} role="group" aria-label="Výběr klíče">
-        {CLEFS.map((cl) => (
-          <button
-            key={cl.id}
-            aria-pressed={clef === cl.id}
-            onClick={() => setClef(cl.id)}
-          >
+      <p className={c.sectionLabel}>{t.clefLabel}</p>
+      <div className={s.seg} role="group" aria-label={t.clefLabel}>
+        {clefs.map((cl) => (
+          <button key={cl.id} aria-pressed={clef === cl.id} onClick={() => setClef(cl.id)}>
             <span className={s.ic}>{cl.ic}</span>
             {cl.label}
           </button>
@@ -69,10 +72,10 @@ export function Home({
       </div>
 
       <p className={c.sectionLabel} style={{ marginTop: 22 }}>
-        Vyber cvičení
+        {t.chooseExercise}
       </p>
       <div className={s.modes}>
-        {MODES.map((m) => (
+        {modes.map((m) => (
           <button key={m.id} className={s.modeCard} onClick={() => onStart(m.id)}>
             <span className={s.num}>{m.icon}</span>
             <span className={s.txt}>
@@ -82,15 +85,38 @@ export function Home({
             <span className={s.go}>›</span>
           </button>
         ))}
+        <button className={s.modeCard} onClick={onOpenStats}>
+          <span className={s.num}>📊</span>
+          <span className={s.txt}>
+            <b>{t.results}</b>
+            <span>{t.resultsDesc}</span>
+          </span>
+          <span className={s.go}>›</span>
+        </button>
       </div>
 
       <details className={s.settings}>
-        <summary>⚙️ Nastavení</summary>
+        <summary>⚙️ {t.settings}</summary>
         <div className={s.settingsBody}>
-          <div className={s.switchRow}>
+          <p className={c.sectionLabel} style={{ margin: '4px 0 8px' }}>
+            {t.language}
+          </p>
+          <div className={s.seg} role="group" aria-label={t.language}>
+            {LANGS.map((lng) => (
+              <button
+                key={lng}
+                aria-pressed={settings.lang === lng}
+                onClick={() => setSettings((prev) => ({ ...prev, lang: lng }))}
+              >
+                {LANG_NAMES[lng]}
+              </button>
+            ))}
+          </div>
+
+          <div className={s.switchRow} style={{ marginTop: 8 }}>
             <span className={s.lbl}>
-              <b>Kontrolovat oktávu u mikrofonu</b>
-              <span>Když je vypnuto, stačí správný název noty</span>
+              <b>{t.setMicOctave}</b>
+              <span>{t.setMicOctaveDesc}</span>
             </span>
             <label className={s.switch}>
               <input
@@ -105,8 +131,8 @@ export function Home({
           </div>
           <div className={s.switchRow}>
             <span className={s.lbl}>
-              <b>Přehrát notu po odpovědi</b>
-              <span>Uslyšíš, jak nota zní</span>
+              <b>{t.setAutoPlay}</b>
+              <span>{t.setAutoPlayDesc}</span>
             </span>
             <label className={s.switch}>
               <input
@@ -121,8 +147,8 @@ export function Home({
           </div>
           <div className={s.switchRow}>
             <span className={s.lbl}>
-              <b>Automaticky poslouchat</b>
-              <span>V režimu Zahraj notu se mikrofon u každé noty zapne sám</span>
+              <b>{t.setAutoListen}</b>
+              <span>{t.setAutoListenDesc}</span>
             </span>
             <label className={s.switch}>
               <input
@@ -138,9 +164,7 @@ export function Home({
         </div>
       </details>
 
-      <p className={s.foot}>
-        Noty: C D E F G A <b>H</b> &nbsp;•&nbsp; H = anglické B, B = béčko (Bb)
-      </p>
+      <p className={s.foot}>{t.foot}</p>
     </div>
   );
 }

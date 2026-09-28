@@ -1,6 +1,7 @@
 import { useId } from 'react';
 import type { Clef } from '../music';
 import { diatonicIndex } from '../music';
+import { useT } from '../i18n';
 import s from './Staff.module.css';
 
 interface StaffProps {
@@ -15,8 +16,13 @@ const GAP = 18;
 const STEP = GAP / 2;
 const LEFT = 24;
 const RIGHT = 336;
+// Crop the viewBox to the vertical band the staff, clef and ledgers actually use,
+// so the note card isn't mostly empty space (was 0..300).
+const VIEW_TOP = 72;
+const VIEW_H = 184;
 
 export function Staff({ midi, clef }: StaffProps) {
+  const t = useT();
   // Re-mount the note group on each note so the pop animation replays.
   const key = useId() + midi + clef;
   const dCenter = clef === 'treble' ? diatonicIndex(71) : diatonicIndex(50); // H4 / D3 on the middle line
@@ -34,7 +40,7 @@ export function Staff({ midi, clef }: StaffProps) {
   const sy2 = stemUp ? ny - GAP * 3.4 : ny + GAP * 3.4;
 
   return (
-    <svg viewBox={`0 0 ${W} 300`} role="img" aria-label="Nota na notové osnově">
+    <svg viewBox={`0 ${VIEW_TOP} ${W} ${VIEW_H}`} role="img" aria-label={t.staffAria}>
       {staffLines.map((y, i) => (
         <line
           key={i}
@@ -63,7 +69,7 @@ export function Staff({ midi, clef }: StaffProps) {
       ) : (
         <text
           x={52}
-          y={CY - GAP * 0.75}
+          y={CY + GAP * 0.1}
           fontSize={GAP * 4.5}
           fill="var(--staff-ink)"
           textAnchor="middle"
