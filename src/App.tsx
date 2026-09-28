@@ -25,7 +25,7 @@ const DEFAULT_SETTINGS: Settings = {
   autoListen: true,
   lang: 'cs',
   sessionLength: 20,
-  perNoteSeconds: 20,
+  perNoteSeconds: 30,
 };
 
 function initialSettings(): Settings {

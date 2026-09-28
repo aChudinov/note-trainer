@@ -181,7 +181,7 @@ export function Home({
             {t.perNoteTime}
           </p>
           <div className={s.seg} role="group" aria-label={t.perNoteTime}>
-            {[0, 5, 10, 15, 20].map((n) => (
+            {[0, 15, 30, 45, 60].map((n) => (
               <button
                 key={n}
                 aria-pressed={settings.perNoteSeconds === n}
