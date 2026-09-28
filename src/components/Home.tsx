@@ -119,6 +119,22 @@ export function Home({
               <span className={s.track} />
             </label>
           </div>
+          <div className={s.switchRow}>
+            <span className={s.lbl}>
+              <b>Automaticky poslouchat</b>
+              <span>V režimu Zahraj notu se mikrofon u každé noty zapne sám</span>
+            </span>
+            <label className={s.switch}>
+              <input
+                type="checkbox"
+                checked={settings.autoListen}
+                onChange={(e) =>
+                  setSettings((prev) => ({ ...prev, autoListen: e.target.checked }))
+                }
+              />
+              <span className={s.track} />
+            </label>
+          </div>
         </div>
       </details>
 

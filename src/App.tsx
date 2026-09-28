@@ -7,6 +7,7 @@ import { useTheme } from './useTheme';
 export interface Settings {
   micOctave: boolean;
   autoPlay: boolean;
+  autoListen: boolean;
 }
 
 type Screen = { name: 'home' } | { name: 'game'; mode: Mode };
@@ -17,6 +18,7 @@ export function App() {
   const [settings, setSettings] = useState<Settings>({
     micOctave: false,
     autoPlay: true,
+    autoListen: false,
   });
   const theme = useTheme();
 

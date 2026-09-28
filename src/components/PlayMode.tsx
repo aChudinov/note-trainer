@@ -8,10 +8,17 @@ interface PlayModeProps {
   midi: number;
   answered: boolean;
   micOctave: boolean;
+  autoListen: boolean;
   onAnswer: (ok: boolean) => void;
 }
 
-export function PlayMode({ midi, answered, micOctave, onAnswer }: PlayModeProps) {
+export function PlayMode({
+  midi,
+  answered,
+  micOctave,
+  autoListen,
+  onAnswer,
+}: PlayModeProps) {
   const [listening, setListening] = useState(false);
   const [status, setStatus] = useState('Klikni na „Poslouchat“ a zahraj notu');
   const [heard, setHeard] = useState<{ name: string; oct: number } | null>(null);
@@ -124,6 +131,13 @@ export function PlayMode({ midi, answered, micOctave, onAnswer }: PlayModeProps)
       setStatus(`Nepovedlo se zapnout mikrofon (${name})`);
     }
   }, [loop]);
+
+  // With auto-listen on, start the mic for each new note automatically.
+  // (The component is re-mounted per question, so this runs once per note.
+  // The very first time still needs one tap for the iOS permission/audio gesture.)
+  useEffect(() => {
+    if (autoListen && !answered) void start();
+  }, [autoListen, answered, start]);
 
   return (
     <div>

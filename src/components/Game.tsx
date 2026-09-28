@@ -161,6 +161,7 @@ export function Game({
           midi={q.midi}
           answered={answered}
           micOctave={settings.micOctave}
+          autoListen={settings.autoListen}
           onAnswer={onAnswer}
         />
       )}
