@@ -75,6 +75,17 @@ export interface Dict {
   noData: string;
   reset: string;
   resetConfirm: string;
+
+  sessionLabel: string;
+  endless: string;
+  notesUnit: string;
+  perNoteTime: string;
+  off: string;
+  seeResults: string;
+  sessionDone: string;
+  playAgain: string;
+  home: string;
+  timeUp: (label: string) => string;
 }
 
 export const translations: Record<Lang, Dict> = {
@@ -148,6 +159,17 @@ export const translations: Record<Lang, Dict> = {
     noData: 'Zatím žádná data — začni hrát! 🎹',
     reset: 'Vymazat výsledky',
     resetConfirm: 'Opravdu vymazat?',
+
+    sessionLabel: 'Počet not',
+    endless: 'Volně',
+    notesUnit: 'not',
+    perNoteTime: 'Čas na notu',
+    off: 'Vyp.',
+    seeResults: 'Výsledky ›',
+    sessionDone: 'Hotovo! 🎉',
+    playAgain: 'Hrát znovu',
+    home: 'Domů',
+    timeUp: (label) => `Čas vypršel! Správně je ${label}`,
   },
 
   ru: {
@@ -220,6 +242,17 @@ export const translations: Record<Lang, Dict> = {
     noData: 'Пока нет данных — начни играть! 🎹',
     reset: 'Сбросить результаты',
     resetConfirm: 'Точно сбросить?',
+
+    sessionLabel: 'Сколько нот',
+    endless: 'Свободно',
+    notesUnit: 'нот',
+    perNoteTime: 'Время на ноту',
+    off: 'Выкл.',
+    seeResults: 'Итоги ›',
+    sessionDone: 'Готово! 🎉',
+    playAgain: 'Играть снова',
+    home: 'Домой',
+    timeUp: (label) => `Время вышло! Правильно — ${label}`,
   },
 };
 

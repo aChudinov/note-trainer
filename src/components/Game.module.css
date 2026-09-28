@@ -61,3 +61,54 @@
   background: var(--bad-soft);
   color: var(--bad);
 }
+
+/* per-note countdown */
+.timer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -2px 0 14px;
+}
+.timerBar {
+  flex: 1;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+}
+.timerFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+  will-change: width;
+}
+.timerNum {
+  flex: none;
+  min-width: 34px;
+  text-align: right;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  font-size: 15px;
+  color: var(--muted);
+}
+.timerDanger .timerFill {
+  background: var(--bad);
+}
+.timerDanger .timerNum {
+  color: var(--bad);
+}
+
+/* session summary */
+.summary {
+  text-align: center;
+  padding: 24px 4px 8px;
+}
+.summaryEmoji {
+  font-size: 64px;
+  line-height: 1;
+}
+.summaryTitle {
+  font-size: 28px;
+  font-weight: 800;
+  margin: 8px 0 22px;
+}

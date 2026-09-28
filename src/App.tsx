@@ -11,6 +11,8 @@ export interface Settings {
   autoPlay: boolean;
   autoListen: boolean;
   lang: Lang;
+  sessionLength: number; // notes per session; 0 = endless / free play
+  perNoteSeconds: number; // countdown per note; 0 = off
 }
 
 type Screen = { name: 'home' } | { name: 'game'; mode: Mode } | { name: 'stats' };
@@ -22,6 +24,8 @@ const DEFAULT_SETTINGS: Settings = {
   autoPlay: true,
   autoListen: true,
   lang: 'cs',
+  sessionLength: 10,
+  perNoteSeconds: 10,
 };
 
 function initialSettings(): Settings {

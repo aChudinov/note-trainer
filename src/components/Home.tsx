@@ -72,6 +72,21 @@ export function Home({
       </div>
 
       <p className={c.sectionLabel} style={{ marginTop: 22 }}>
+        {t.sessionLabel}
+      </p>
+      <div className={s.seg} role="group" aria-label={t.sessionLabel}>
+        {[10, 20, 30, 0].map((n) => (
+          <button
+            key={n}
+            aria-pressed={settings.sessionLength === n}
+            onClick={() => setSettings((prev) => ({ ...prev, sessionLength: n }))}
+          >
+            {n === 0 ? '∞' : n}
+          </button>
+        ))}
+      </div>
+
+      <p className={c.sectionLabel} style={{ marginTop: 22 }}>
         {t.chooseExercise}
       </p>
       <div className={s.modes}>
@@ -160,6 +175,21 @@ export function Home({
               />
               <span className={s.track} />
             </label>
+          </div>
+
+          <p className={c.sectionLabel} style={{ margin: '10px 0 8px' }}>
+            {t.perNoteTime}
+          </p>
+          <div className={s.seg} role="group" aria-label={t.perNoteTime}>
+            {[0, 5, 10, 15, 20].map((n) => (
+              <button
+                key={n}
+                aria-pressed={settings.perNoteSeconds === n}
+                onClick={() => setSettings((prev) => ({ ...prev, perNoteSeconds: n }))}
+              >
+                {n === 0 ? t.off : `${n}s`}
+              </button>
+            ))}
           </div>
         </div>
       </details>
