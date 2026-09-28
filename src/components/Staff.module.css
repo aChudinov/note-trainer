@@ -1,0 +1,41 @@
+.card {
+  background: var(--staff-paper);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.card svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.clefTag {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.pop {
+  animation: pop 0.3s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}

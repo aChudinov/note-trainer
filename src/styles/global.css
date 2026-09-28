@@ -1,0 +1,119 @@
+:root {
+  /* palette — sheet-music ivory, violet ink, violet accent, warm gold */
+  --paper: #fbf7f0;
+  --surface: #ffffff;
+  --ink: #2a2433;
+  --muted: #6e6579;
+  --line: #e7dfd3;
+  --accent: #6c4ce0;
+  --accent-soft: #eee9fc;
+  --gold: #ffb627;
+  --good: #22a06b;
+  --good-soft: #e4f5ec;
+  --bad: #e5484d;
+  --bad-soft: #fce7e7;
+  --shadow: 0 10px 30px rgba(42, 36, 51, 0.12);
+  --shadow-sm: 0 3px 10px rgba(42, 36, 51, 0.1);
+  --radius: 22px;
+  /* staff stays light "paper" in both themes so notes always read clearly */
+  --staff-paper: #fcfaf5;
+  --staff-ink: #2a2433;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #171320;
+    --surface: #211b2c;
+    --ink: #f3eef8;
+    --muted: #a99fb8;
+    --line: #352c46;
+    --accent: #9a80ff;
+    --accent-soft: #2a2140;
+    --gold: #ffc94d;
+    --good: #3fd190;
+    --good-soft: #173327;
+    --bad: #ff6b70;
+    --bad-soft: #3a1e22;
+    --shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
+    --shadow-sm: 0 3px 12px rgba(0, 0, 0, 0.4);
+    --staff-paper: #fcfaf5;
+    --staff-ink: #2a2433;
+  }
+}
+
+:root[data-theme='light'] {
+  --paper: #fbf7f0;
+  --surface: #ffffff;
+  --ink: #2a2433;
+  --muted: #6e6579;
+  --line: #e7dfd3;
+  --accent: #6c4ce0;
+  --accent-soft: #eee9fc;
+  --gold: #ffb627;
+  --good: #22a06b;
+  --good-soft: #e4f5ec;
+  --bad: #e5484d;
+  --bad-soft: #fce7e7;
+  --shadow: 0 10px 30px rgba(42, 36, 51, 0.12);
+  --shadow-sm: 0 3px 10px rgba(42, 36, 51, 0.1);
+  --staff-paper: #fcfaf5;
+  --staff-ink: #2a2433;
+}
+
+:root[data-theme='dark'] {
+  --paper: #171320;
+  --surface: #211b2c;
+  --ink: #f3eef8;
+  --muted: #a99fb8;
+  --line: #352c46;
+  --accent: #9a80ff;
+  --accent-soft: #2a2140;
+  --gold: #ffc94d;
+  --good: #3fd190;
+  --good-soft: #173327;
+  --bad: #ff6b70;
+  --bad-soft: #3a1e22;
+  --shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 3px 12px rgba(0, 0, 0, 0.4);
+  --staff-paper: #fcfaf5;
+  --staff-ink: #2a2433;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: ui-rounded, 'SF Pro Rounded', 'Nunito', system-ui, -apple-system,
+    'Segoe UI', Roboto, sans-serif;
+  background:
+    radial-gradient(
+      1200px 600px at 50% -10%,
+      color-mix(in srgb, var(--accent) 10%, transparent),
+      transparent 60%
+    ),
+    var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
