@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { appOctave, freqToMidi, noteName } from '../music';
 import { autoCorrelate, getCtx } from '../audio';
+import { useT } from '../i18n';
 import a from './answers.module.css';
 import c from './controls.module.css';
 
@@ -19,8 +20,9 @@ export function PlayMode({
   autoListen,
   onAnswer,
 }: PlayModeProps) {
+  const t = useT();
   const [listening, setListening] = useState(false);
-  const [status, setStatus] = useState('Klikni na „Poslouchat“ a zahraj notu');
+  const [status, setStatus] = useState(t.micHint);
   const [heard, setHeard] = useState<{ name: string; oct: number } | null>(null);
   const [level, setLevel] = useState(0);
 
@@ -105,10 +107,10 @@ export function PlayMode({
 
   const start = useCallback(async () => {
     if (!navigator.mediaDevices?.getUserMedia) {
-      setStatus('Mikrofon tu není dostupný 😕');
+      setStatus(t.micUnavailable);
       return;
     }
-    setStatus('Povol prosím mikrofon…');
+    setStatus(t.micAllow);
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false },
@@ -124,13 +126,13 @@ export function PlayMode({
       bufRef.current = new Float32Array(analyser.fftSize);
       histRef.current = [];
       setListening(true);
-      setStatus('Poslouchám… zahraj notu 🎧');
+      setStatus(t.micListening);
       rafRef.current = requestAnimationFrame(loop);
     } catch (err) {
-      const name = err instanceof Error ? err.name : 'chyba';
-      setStatus(`Nepovedlo se zapnout mikrofon (${name})`);
+      const name = err instanceof Error ? err.name : 'error';
+      setStatus(t.micError(name));
     }
-  }, [loop]);
+  }, [loop, t]);
 
   // With auto-listen on, start the mic for each new note automatically.
   // (The component is re-mounted per question, so this runs once per note.
@@ -164,13 +166,13 @@ export function PlayMode({
           onClick={() => {
             if (listening) {
               stop();
-              setStatus('Zastaveno');
+              setStatus(t.micStopped);
             } else {
               void start();
             }
           }}
         >
-          {listening ? '⏸ Zastavit' : '🎤 Poslouchat'}
+          {listening ? t.micStop : t.micListen}
         </button>
       </div>
     </div>

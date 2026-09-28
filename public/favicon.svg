@@ -4,28 +4,36 @@
       <stop offset="0" stop-color="#7C5CF0"/>
       <stop offset="1" stop-color="#5B3ED0"/>
     </linearGradient>
+    <clipPath id="keys">
+      <rect x="112" y="352" width="288" height="96" rx="16"/>
+    </clipPath>
   </defs>
+
   <rect width="512" height="512" rx="112" fill="url(#bg)"/>
 
-  <!-- piano keys strip -->
-  <g transform="translate(96 300)">
-    <rect x="0" y="0" width="320" height="120" rx="16" fill="#FCFAF5"/>
+  <!-- keyboard -->
+  <rect x="112" y="352" width="288" height="96" rx="16" fill="#FCFAF5"/>
+  <g clip-path="url(#keys)">
+    <g stroke="#2A2433" stroke-width="3" opacity="0.85">
+      <line x1="153.1" y1="352" x2="153.1" y2="448"/>
+      <line x1="194.3" y1="352" x2="194.3" y2="448"/>
+      <line x1="235.4" y1="352" x2="235.4" y2="448"/>
+      <line x1="276.6" y1="352" x2="276.6" y2="448"/>
+      <line x1="317.7" y1="352" x2="317.7" y2="448"/>
+      <line x1="358.9" y1="352" x2="358.9" y2="448"/>
+    </g>
     <g fill="#2A2433">
-      <rect x="64" y="0" width="10" height="120"/>
-      <rect x="128" y="0" width="10" height="120"/>
-      <rect x="192" y="0" width="10" height="120"/>
-      <rect x="256" y="0" width="10" height="120"/>
-      <rect x="44" y="0" width="26" height="72" rx="5"/>
-      <rect x="108" y="0" width="26" height="72" rx="5"/>
-      <rect x="196" y="0" width="26" height="72" rx="5"/>
-      <rect x="260" y="0" width="26" height="72" rx="5"/>
+      <rect x="140.1" y="352" width="26" height="60" rx="6"/>
+      <rect x="181.3" y="352" width="26" height="60" rx="6"/>
+      <rect x="263.6" y="352" width="26" height="60" rx="6"/>
+      <rect x="304.7" y="352" width="26" height="60" rx="6"/>
+      <rect x="345.9" y="352" width="26" height="60" rx="6"/>
     </g>
   </g>
 
-  <!-- quarter note -->
+  <!-- quarter note (clean primitives, no hand-drawn path) -->
   <g fill="#FFB627">
-    <rect x="286" y="96" width="20" height="176" rx="8"/>
-    <ellipse cx="266" cy="268" rx="46" ry="34" transform="rotate(-22 266 268)"/>
-    <path d="M306 96 q60 14 60 66 q0 10 -6 22 q10 -18 10 -34 q0 -44 -64 -66 z"/>
+    <rect x="292" y="120" width="20" height="192" rx="10"/>
+    <ellipse cx="248" cy="300" rx="50" ry="37" transform="rotate(-20 248 300)"/>
   </g>
 </svg>
