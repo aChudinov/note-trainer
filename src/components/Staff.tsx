@@ -69,7 +69,7 @@ export function Staff({ midi, clef }: StaffProps) {
       ) : (
         <text
           x={52}
-          y={CY + GAP * 0.1}
+          y={CY + GAP * 1.1}
           fontSize={GAP * 4.5}
           fill="var(--staff-ink)"
           textAnchor="middle"
